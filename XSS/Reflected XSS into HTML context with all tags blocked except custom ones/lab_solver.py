@@ -47,7 +47,7 @@ def get_user_inputs():
     return lab_url, exploit_server_url, burp_proxy
 
 
-def build_xss_payload(lab_url: str) -> str:
+def build_payload(lab_url: str) -> str:
     """
     Generate the XSS payload with a custom <xss> tag that triggers alert(document.cookie).
     """
@@ -102,7 +102,7 @@ def main():
     lab_url, exploit_server_url, burp_proxy = get_user_inputs()
 
     # Step 2: Generate XSS payload
-    payload = build_xss_payload(lab_url)
+    payload = build_payload(lab_url)
 
     # Step 3: Deliver the payload to the exploit server
     print(f"{Fore.YELLOW}[*] Delivering exploit to the victim via exploit server...", end="")
